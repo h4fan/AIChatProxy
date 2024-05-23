@@ -1,5 +1,6 @@
 # AIChatProxy
-Chat to different AI webpage in one single page
+Chat to different AI webpage in one single page.  
+一个页面，同时调用hunyuan、qianwen、chatglm。
 
 ## 演示
 ![demo](/static/demo.png)
