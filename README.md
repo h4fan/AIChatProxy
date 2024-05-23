@@ -11,10 +11,10 @@ Chat to different AI webpage in one single page
 3. 如果你想使用其他域名来展示前端页面，需要搜索替换代码中的`http://127.0.0.1:8000`为你的域名，如`https://aichatproxy.pages.dev`，之后再使用开发者模式加载插件。
 
 ### 登陆
-分别在浏览器中各个AI的网页版本。
+分别在浏览器中各个AI的网页版本。如果之前登陆过，这一步可以跳过。
 
 ### 展示前端
-本地python展示或者使用在线页面。
+本地python展示或者使用在线页面，依次点开你想要对话的AI。
 
 ### Prompt
 在页面输入框中输入Prompt，感受一次使用多个AI的畅快。
