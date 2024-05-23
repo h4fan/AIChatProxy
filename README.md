@@ -21,3 +21,6 @@ Chat to different AI webpage in one single page
 
 ### 其他
 如果你想使用`https://aichatproxy.pages.dev`作为前端，可以下载已经[修改配置的版本](https://github.com/h4fan/AIChatProxy/tree/gh-pages)。
+
+## 原理
+通过插件在各个ai页面插入js代码，通过window.opener.postMessage和当前网站进行通信。注意检查origin，避免风险。
