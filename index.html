@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ChatProxy</title>
+  <style>
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: 10% 1fr 1fr;
+            grid-gap: 10px;
+            height: 100vh; /* Set the height of the container to the viewport height */
+        }
+        .item {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+            position: relative; /* Add position: relative to the item container */
+        }
+         .scrollable {
+            overflow-y: scroll; /* Add a vertical scrollbar when needed */
+            height: 100%; /* Set the height of the scrollable div to 100% of the item container */
+            max-height: 500px;
+            max-width: 1000px;
+            
+        }
+        .question {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: right;
+            position: relative; /* Add position: relative to the item container */
+        }
+      
+        textarea {
+            width: 100%;
+            height: 100%;
+            resize: none;
+        }
+
+        button {
+            margin: 2px;
+        }
+
+    </style>
+
+    <script type="text/javascript" src="purify.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="item">
+            <textarea id="myTextarea" placeholder="Enter your Prompt and press Enter..."></textarea>
+        </div>
+        <div class="item"><button onclick="function1()">Hunyuan</button>
+           <button onclick="function2()">Qianwen</button>
+           <button onclick="function3()">Chatglm</button>
+           <button onclick="function4()">Function 4</button></div>
+        <div class="item">
+            <div class="scrollable" id="hunyuan"></div>
+        </div>
+        <div class="item">
+            <div class="scrollable" id="qianwen"></div>
+        </div>
+        <div class="item">
+            <div class="scrollable" id="chatglm"></div>
+        </div>
+        <div class="item"></div>
+    </div>
+    <script>
+        function sendrequest() {
+            // Your sendrequest function implementation
+            if(window.hunyuanWindow){
+                inputValue = document.getElementById("myTextarea").value;
+                document.getElementById( "hunyuan" ).innerHTML +=  DOMPurify.sanitize("<div class='question'>" +inputValue+"</div>");
+
+                window.hunyuanWindow.postMessage({ action: "getData", data: inputValue }, 'https://hunyuan.tencent.com');                
+            }
+
+            if(window.qianwenWindow){
+                inputValue = document.getElementById("myTextarea").value;
+                document.getElementById( "qianwen" ).innerHTML +=  DOMPurify.sanitize("<div class='question'>" +inputValue+"</div>");
+
+                window.qianwenWindow.postMessage({ action: "getData", data: inputValue }, 'https://tongyi.aliyun.com');
+            }
+
+            if(window.chatglmWindow){
+                inputValue = document.getElementById("myTextarea").value;
+                document.getElementById( "chatglm" ).innerHTML +=  DOMPurify.sanitize("<div class='question'>" +inputValue+"</div>");
+
+                window.chatglmWindow.postMessage({ action: "getData", data: inputValue }, 'https://chatglm.cn');
+            }
+            
+        }
+
+        const textarea = document.getElementById("myTextarea");
+        textarea.addEventListener("keydown", (event) => {
+            if (event.keyCode === 13) {
+                event.preventDefault(); // Prevent default behavior of Enter key
+                sendrequest();
+            }
+        });
+
+         function function1() {
+            //console.log("Function 1 executed");
+            var hunyuanWindow = window.open('https://hunyuan.tencent.com/bot/chat')
+            window.hunyuanWindow = hunyuanWindow;
+
+        }
+
+        function function2() {
+            //console.log("Function 2 executed");
+            var qianwenWindow = window.open('https://tongyi.aliyun.com/qianwen/')
+            window.qianwenWindow = qianwenWindow;
+        }
+
+        function function3() {
+            //console.log("Function 3 executed");
+            var chatglmWindow = window.open('https://chatglm.cn/main/alltoolsdetail')
+            window.chatglmWindow = chatglmWindow;
+        }
+
+        function function4() {
+            console.log("Function 4 executed");
+        }
+
+        window.targetAIs = ["https://hunyuan.tencent.com","https://tongyi.aliyun.com",'https://chatglm.cn']
+        window.addEventListener("message", (event) => {
+   
+            if ( window.targetAIs.includes(event.origin) && event.data.action === "responseData") {
+           
+                document.getElementById( event.data.data.aisource ).innerHTML += DOMPurify.sanitize( event.data.data.data);
+
+                const scrollableDiv = document.getElementById(event.data.data.aisource);
+                scrollableDiv.scrollTop = scrollableDiv.scrollHeight;
+          }
+        }
+
+        );
+
+    </script>
+</body>
+</html>
