@@ -18,3 +18,6 @@ Chat to different AI webpage in one single page
 
 ### Prompt
 在页面输入框中输入Prompt，感受一次使用多个AI的畅快。
+
+### 其他
+如果你想使用`https://aichatproxy.pages.dev`作为前端，可以下载已经[修改配置的版本](https://github.com/h4fan/AIChatProxy/tree/gh-pages)。
