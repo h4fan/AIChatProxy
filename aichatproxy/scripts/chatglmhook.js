@@ -7,7 +7,7 @@ function cp_getCookie(name) {
 
 window.addEventListener("message", (event) => {
   //console.log(event)
-  if ( event.origin == "http://127.0.0.1:8000" && event.data.action && event.data.action === "getData") {
+  if ( event.origin == "https://aichatproxy.pages.dev" && event.data.action && event.data.action === "getData") {
     //console.log("Message from the webpage:", event.data.data);
     
     if(window.cp_conversation_id){
@@ -92,7 +92,7 @@ async function logAnalyze(url, clonedResponse){
                                 respJson = JSON.parse(item.split('data:').pop())
                                                           
                                 window.cp_conversation_id = respJson['conversation_id']
-                                window.opener.postMessage({ action: "responseData", data: {data: respJson['parts'][0]['content'][0]['text'], aisource:"chatglm" } }, 'http://127.0.0.1:8000/');
+                                window.opener.postMessage({ action: "responseData", data: {data: respJson['parts'][0]['content'][0]['text'], aisource:"chatglm" } }, 'https://aichatproxy.pages.dev/');
                                 break;
                             }
                             

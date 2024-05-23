@@ -1,6 +1,6 @@
 
 window.addEventListener("message", (event) => {
-  if ( event.origin == "http://127.0.0.1:8000" && event.data.action && event.data.action === "getData") {
+  if ( event.origin == "https://aichatproxy.pages.dev" && event.data.action && event.data.action === "getData") {
    
     if(!window.cp_sessionid){
       window.cp_sessionid= crypto.randomUUID().replace(/-/g, "");
@@ -82,7 +82,7 @@ async function logAnalyze(url, clonedResponse){
                           respJson = JSON.parse(window.cp_lastmessage.substring(5))
                           window.cp_sessionid = respJson['sessionId']
                           window.cp_parentid = respJson['msgId']
-                          window.opener.postMessage({ action: "responseData", data: {data: respJson['contents'][0]["content"], aisource:"qianwen" } }, 'http://127.0.0.1:8000/');
+                          window.opener.postMessage({ action: "responseData", data: {data: respJson['contents'][0]["content"], aisource:"qianwen" } }, 'https://aichatproxy.pages.dev/');
                         }
                     }
                     else{
