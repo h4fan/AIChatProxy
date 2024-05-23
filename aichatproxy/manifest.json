@@ -1,0 +1,35 @@
+{
+  "name": "AIChatProxy",
+  "description": "Chat to different ais in a single page",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {
+    "default_popup": "hello.html",
+    "default_icon": "hello_extensions.png"
+  },
+
+  "content_scripts": [
+    {
+      "js": ["scripts/hunyuanhook.js"],
+      "matches": [
+        "https://hunyuan.tencent.com/bot/chat/*"
+      ],
+      "world": "MAIN"
+    },
+    {
+      "js": ["scripts/qianwenhook.js"],
+      "matches": [
+        "https://tongyi.aliyun.com/qianwen*"
+      ],
+      "world": "MAIN"
+    },
+    {
+      "js": ["scripts/chatglmhook.js"],
+      "matches": [
+        "https://chatglm.cn/main/alltoolsdetail"
+      ],
+      "world": "MAIN"
+    }
+
+  ]
+}
